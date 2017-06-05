@@ -1,13 +1,23 @@
 {
   "name": "voting-client",
   "version": "0.1.0",
+  "description": "Full-stack redux tutorial (client)",
   "private": true,
+  "author": "Thibaut Tiberghien",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
