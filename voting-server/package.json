@@ -4,6 +4,7 @@
   "description": "Full-stack redux tutorial (server)",
   "main": "index.js",
   "scripts": {
+    "start": "babel-node index.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/testHelper.js --recursive",
     "test:watch": "npm run test -- --watch"
   },
@@ -11,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "immutable": "^3.8.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "socket.io": "^2.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
