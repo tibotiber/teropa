@@ -31,5 +31,5 @@ export const next = state => {
 }
 
 export const vote = (state, entry) => {
-  return state.updateIn(['vote', 'tally', entry], (score = 0) => score + 1)
+  return state.updateIn(['tally', entry], (score = 0) => score + 1)
 }
