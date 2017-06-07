@@ -1,7 +1,8 @@
 import React from 'react'
 
-const wrapFunctionalComponent = WrappedComponent => {
-  return class Component extends React.Component {
+const wrapFunctionalComponent = ({ pure = false } = {}) => WrappedComponent => {
+  const Component = pure ? React.PureComponent : React.Component
+  return class extends Component {
     render () {
       return <WrappedComponent {...this.props} />
     }

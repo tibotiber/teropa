@@ -1,15 +1,17 @@
 /* global describe it */
 import React from 'react'
+import ReactDOM from 'react-dom'
 import {
   renderIntoDocument,
   scryRenderedDOMComponentsWithTag,
   Simulate
 } from 'react-dom/test-utils'
 import { expect } from 'chai'
+import { List } from 'immutable'
 import wrapFunctionalComponent from '../wrapFunctionalComponent'
 import VotingComponent from '../../src/components/Voting'
 
-const Voting = wrapFunctionalComponent(VotingComponent)
+const Voting = wrapFunctionalComponent({ pure: true })(VotingComponent)
 
 describe('Voting', () => {
   it('renders a pair of buttons', () => {
@@ -62,5 +64,29 @@ describe('Voting', () => {
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     expect(buttons.length).to.equal(1)
     expect(buttons[0].textContent).to.contain('Trainspotting')
+  })
+
+  it('renders as a pure component', () => {
+    const pair = ['Trainspotting', '28 Days Later']
+    const container = document.createElement('div')
+    let component = ReactDOM.render(<Voting pair={pair} />, container)
+    let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0]
+    expect(firstButton.textContent).to.equal('Trainspotting')
+    pair[0] = 'Sunshine'
+    component = ReactDOM.render(<Voting pair={pair} />, container)
+    firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0]
+    expect(firstButton.textContent).to.equal('Trainspotting')
+  })
+
+  it('does update DOM when prop changes', () => {
+    const pair = List.of('Trainspotting', '28 Days Later')
+    const container = document.createElement('div')
+    let component = ReactDOM.render(<Voting pair={pair} />, container)
+    let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0]
+    expect(firstButton.textContent).to.equal('Trainspotting')
+    const newPair = pair.set(0, 'Sunshine')
+    component = ReactDOM.render(<Voting pair={newPair} />, container)
+    firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0]
+    expect(firstButton.textContent).to.equal('Sunshine')
   })
 })
