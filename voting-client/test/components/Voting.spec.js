@@ -6,15 +6,15 @@ import {
   Simulate
 } from 'react-dom/test-utils'
 import { expect } from 'chai'
-import Voting from '../../src/components/Voting'
-import FunctionalComponentWrapper from '../Wrapper'
+import wrapFunctionalComponent from '../wrapFunctionalComponent'
+import VotingComponent from '../../src/components/Voting'
+
+const Voting = wrapFunctionalComponent(VotingComponent)
 
 describe('Voting', () => {
   it('renders a pair of buttons', () => {
     const component = renderIntoDocument(
-      <FunctionalComponentWrapper>
-        <Voting pair={['Trainspotting', '28 Days Later']} />
-      </FunctionalComponentWrapper>
+      <Voting pair={['Trainspotting', '28 Days Later']} />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     expect(buttons.length).to.equal(2)
@@ -26,9 +26,7 @@ describe('Voting', () => {
     let votedWith
     const vote = entry => votedWith = entry
     const component = renderIntoDocument(
-      <FunctionalComponentWrapper>
-        <Voting pair={['Trainspotting', '28 Days Later']} vote={vote} />
-      </FunctionalComponentWrapper>
+      <Voting pair={['Trainspotting', '28 Days Later']} vote={vote} />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     Simulate.click(buttons[0])
@@ -37,12 +35,10 @@ describe('Voting', () => {
 
   it('disables buttons when user has voted', () => {
     const component = renderIntoDocument(
-      <FunctionalComponentWrapper>
-        <Voting
-          pair={['Trainspotting', '28 Days Later']}
-          hasVoted='Trainspotting'
-        />
-      </FunctionalComponentWrapper>
+      <Voting
+        pair={['Trainspotting', '28 Days Later']}
+        hasVoted='Trainspotting'
+      />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     expect(buttons.length).to.equal(2)
@@ -52,23 +48,17 @@ describe('Voting', () => {
 
   it('adds label to the voted entry', () => {
     const component = renderIntoDocument(
-      <FunctionalComponentWrapper>
-        <Voting
-          pair={['Trainspotting', '28 Days Later']}
-          hasVoted='Trainspotting'
-        />
-      </FunctionalComponentWrapper>
+      <Voting
+        pair={['Trainspotting', '28 Days Later']}
+        hasVoted='Trainspotting'
+      />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     expect(buttons[0].textContent).to.contain('Voted')
   })
 
   it('renders just the winner when there is one', () => {
-    const component = renderIntoDocument(
-      <FunctionalComponentWrapper>
-        <Voting winner='Trainspotting' />
-      </FunctionalComponentWrapper>
-    )
+    const component = renderIntoDocument(<Voting winner='Trainspotting' />)
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     expect(buttons.length).to.equal(1)
     expect(buttons[0].textContent).to.contain('Trainspotting')
