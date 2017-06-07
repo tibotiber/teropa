@@ -1,20 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Winner from './Winner'
+import Vote from './Vote'
 
-const { arrayOf, string } = PropTypes
+const { string } = PropTypes
 
-const Voting = ({ pair = [] }) => (
-  <div className='voting'>
-    {pair.map(entry => (
-      <button key={entry}>
-        <h1>{entry}</h1>
-      </button>
-    ))}
-  </div>
-)
+const Voting = ({ winner, ...props }) =>
+  (winner ? <Winner winner={winner} /> : <Vote {...props} />)
 
 Voting.propTypes = {
-  pair: arrayOf(string)
+  winner: string
 }
 
 export default Voting
