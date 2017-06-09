@@ -5,7 +5,7 @@ const { string } = PropTypes
 
 const Winner = ({ winner }) => (
   <div className='voting'>
-    <button className='voted' disabled>
+    <button className='voted winner' disabled>
       <h1>The winner is {winner}!</h1>
     </button>
   </div>
