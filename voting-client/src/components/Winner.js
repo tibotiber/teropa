@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 const { string } = PropTypes
 
 const Winner = ({ winner }) => (
-  <button className='voted' disabled>
-    <h1>The winner is {winner}!</h1>
-  </button>
+  <div className='voting'>
+    <button className='voted' disabled>
+      <h1>The winner is {winner}!</h1>
+    </button>
+  </div>
 )
 
 Winner.propTypes = {
