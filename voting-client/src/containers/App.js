@@ -3,14 +3,15 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import io from 'socket.io-client'
-import configureStore from '../store'
+import configureStore from '../redux/store'
+import { setState } from '../redux/actions'
 import Voting from './Voting'
 import Results from './Results'
 
 const store = configureStore()
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
-socket.on('state', state => store.dispatch({ type: 'SET_STATE', state }))
+socket.on('state', state => store.dispatch(setState(state)))
 
 const App = () => (
   <Provider store={store}>
