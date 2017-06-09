@@ -8,9 +8,8 @@ import { setState } from '../redux/actions'
 import Voting from './Voting'
 import Results from './Results'
 
-const store = configureStore()
-
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
+const store = configureStore(socket)
 socket.on('state', state => store.dispatch(setState(state)))
 
 const App = () => (

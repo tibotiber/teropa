@@ -1,8 +1,10 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import { configureSocketMiddleware } from './socketMiddleware'
 import reducer from './reducer'
 
-const configureStore = () => {
-  return createStore(reducer)
+const configureStore = socket => {
+  const socketMiddleware = configureSocketMiddleware(socket)
+  return createStore(reducer, applyMiddleware(socketMiddleware))
 }
 
 export default configureStore

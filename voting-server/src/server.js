@@ -14,8 +14,16 @@ const startServer = store => {
 
   // send store to newly connected clients
   io.on('connection', socket => {
+    console.log('client connected')
     socket.emit('state', store.getState().toJS())
-    socket.on('action', store.dispatch.bind(store))
+    socket.on('action', action => {
+      console.log(`action '${action.type}' received`)
+      store.dispatch(action)
+    })
+  })
+
+  io.on('disconnection', () => {
+    console.log('client disconnected')
   })
 }
 
