@@ -8,3 +8,8 @@ export const setState = state => ({
   type: 'SET_STATE',
   state
 })
+
+export const next = state => ({
+  type: 'NEXT',
+  meta: { remote: true }
+})

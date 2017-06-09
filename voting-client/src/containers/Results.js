@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import toJS from './toJS'
 import Results from '../components/Results'
+import { next } from '../redux/actions'
 
 const mapStateToProps = state => ({
   pair: state.getIn(['vote', 'pair']),
@@ -8,4 +9,8 @@ const mapStateToProps = state => ({
   winner: state.get('winner')
 })
 
-export default connect(mapStateToProps)(toJS(Results))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  next: () => dispatch(next())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(toJS(Results))
