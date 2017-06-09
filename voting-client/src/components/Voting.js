@@ -12,9 +12,4 @@ Voting.propTypes = {
   winner: string
 }
 
-// temporary until redux in place
-Voting.defaultProps = {
-  pair: ['Trainspotting', '28 Days Later']
-}
-
 export default Voting

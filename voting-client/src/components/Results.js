@@ -32,13 +32,4 @@ Results.propTypes = {
   winner: string
 }
 
-// temporary until redux is hooked
-Results.defaultProps = {
-  pair: ['Trainspotting', '28 Days Later'],
-  tally: {
-    Trainspotting: 5,
-    '28 Days Later': 4
-  }
-}
-
 export default Results
