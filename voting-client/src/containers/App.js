@@ -1,22 +1,16 @@
+/* global location */
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import io from 'socket.io-client'
 import configureStore from '../store'
 import Voting from './Voting'
 import Results from './Results'
 
 const store = configureStore()
 
-// temporary until socket hooked
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    vote: {
-      pair: ['Sunshine', '28 Days Later'],
-      tally: { Sunshine: 2 }
-    }
-  }
-})
+const socket = io(`${location.protocol}//${location.hostname}:8090`)
+socket.on('state', state => store.dispatch({ type: 'SET_STATE', state }))
 
 const App = () => (
   <Provider store={store}>
