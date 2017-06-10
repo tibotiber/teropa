@@ -22,7 +22,7 @@ const startServer = store => {
     })
   })
 
-  io.on('disconnection', () => {
+  io.on('disconnect', () => {
     console.log('client disconnected')
   })
 }

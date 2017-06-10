@@ -1,10 +1,13 @@
 import { createStore, applyMiddleware } from 'redux'
-import { configureSocketMiddleware } from './socketMiddleware'
+import createSagaMiddleware from 'redux-saga'
 import reducer from './reducer'
+import saga from './saga'
 
-const configureStore = socket => {
-  const socketMiddleware = configureSocketMiddleware(socket)
-  return createStore(reducer, applyMiddleware(socketMiddleware))
+const configureStore = () => {
+  const sagaMiddleware = createSagaMiddleware()
+  const store = createStore(reducer, applyMiddleware(sagaMiddleware))
+  sagaMiddleware.run(saga)
+  return store
 }
 
 export default configureStore

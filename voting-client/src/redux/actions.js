@@ -1,6 +1,5 @@
 export const vote = entry => ({
   type: 'VOTE',
-  meta: { remote: true },
   entry
 })
 
@@ -10,6 +9,5 @@ export const setState = state => ({
 })
 
 export const next = state => ({
-  type: 'NEXT',
-  meta: { remote: true }
+  type: 'NEXT'
 })
